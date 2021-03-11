@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Unity.VectorGraphics;
 
 public class DetectTouch : MonoBehaviour
 {
     public GameObject circle;
     public List<Touch> touches = new List<Touch>();
+
+    //public float toThe 
 
     private ColorManager _colorManager;
 
@@ -52,7 +54,7 @@ public class DetectTouch : MonoBehaviour
         c.name = "Touch" + t.fingerId;
         c.GetComponent<RectTransform>().anchoredPosition = ConvertToCanvasPos(t.position);
         Touch touchScript = c.GetComponent<Touch>();        
-        c.transform.Find("Center").GetComponent<Image>().color = _colorManager.colors[0];
+        c.transform.Find("Center").GetComponent<SVGImage>().color = _colorManager.colors[0];
         touchScript.fingerId = t.fingerId;
         touchScript.color = _colorManager.colors[0];
         _colorManager.colors.RemoveAt(0);
