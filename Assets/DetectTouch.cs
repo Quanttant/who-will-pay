@@ -9,12 +9,13 @@ public class DetectTouch : MonoBehaviour
     public GameObject circle;
     public List<Touch> touches = new List<Touch>();
 
-    public float counter = 3;
-    public float maxTime = 3;
+    public float counter = 3.99f;
+    public float maxTime = 3.99f;
 
     private ColorManager _colorManager;
 
-    bool selectedOne = false;
+    [HideInInspector]
+    public bool selectedOne = false;
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class DetectTouch : MonoBehaviour
         if (2 <= Input.touchCount)
         {
             counter -= Time.deltaTime;
-            if (counter <= 0 && !selectedOne)
+            if (counter <= 0.85 && !selectedOne)
             {
                 selectedOne = true;
                 int randomIndex = Random.Range(0, Input.touchCount);
