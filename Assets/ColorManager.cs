@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
+    public Color backgroundColor;
     public List<Color> colors;
+    
     private void Start()
     {
         IListExtensions.Shuffle(colors);
+        Camera.main.backgroundColor = backgroundColor;
     }
 }
 public static class IListExtensions

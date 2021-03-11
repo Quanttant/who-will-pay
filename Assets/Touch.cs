@@ -7,4 +7,8 @@ public class Touch : MonoBehaviour
 {
     public int fingerId;
     public Color color;
+    private void OnDestroy()
+    {
+        
+    }
 }

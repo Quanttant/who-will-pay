@@ -9,7 +9,8 @@ public class DetectTouch : MonoBehaviour
     public GameObject circle;
     public List<Touch> touches = new List<Touch>();
 
-    //public float toThe 
+    public float counter = 3;
+    public float maxTime = 3;
 
     private ColorManager _colorManager;
 
@@ -20,27 +21,38 @@ public class DetectTouch : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         int i = 0;
         while (i < Input.touchCount)
         {
+            if (2 <= Input.touchCount)
+            {
+                counter -= Time.deltaTime;
+                if (counter <= 0)
+                {
+                    int randomIndex = Random.Range(0, Input.touchCount);
+                    Touch selectedTouch = touches[randomIndex];
+                    Camera.main.backgroundColor = selectedTouch.color;
+                    touches.ForEach(x => Destroy(x.gameObject));
+                }
+            }
             UnityEngine.Touch t = Input.GetTouch(i);
             if (t.phase == TouchPhase.Began)
             {
                 Debug.Log("touch began");
                 touches.Add(createCircle(t));
+                counter = maxTime;
             }
             else if (t.phase == TouchPhase.Ended)
             {
-                Debug.Log("touch ended");
                 Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
                 _colorManager.colors.Add(thisTouch.color);
                 Destroy(thisTouch.gameObject);
                 touches.RemoveAt(touches.IndexOf(thisTouch));
+                counter = maxTime;
             }
             else if (t.phase == TouchPhase.Moved)
             {
-                Debug.Log("touch is moving");
                 Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
                 thisTouch.GetComponent<RectTransform>().anchoredPosition = ConvertToCanvasPos(t.position);
             }
@@ -53,8 +65,9 @@ public class DetectTouch : MonoBehaviour
         GameObject c = Instantiate(circle, transform) as GameObject;
         c.name = "Touch" + t.fingerId;
         c.GetComponent<RectTransform>().anchoredPosition = ConvertToCanvasPos(t.position);
-        Touch touchScript = c.GetComponent<Touch>();        
-        c.transform.Find("Center").GetComponent<SVGImage>().color = _colorManager.colors[0];
+        Touch touchScript = c.GetComponent<Touch>();
+        //c.transform.Find("Center").GetComponent<SVGImage>().color = _colorManager.colors[0];
+        c.transform.Find("Center").GetComponent<Image>().color = _colorManager.colors[0];
         touchScript.fingerId = t.fingerId;
         touchScript.color = _colorManager.colors[0];
         _colorManager.colors.RemoveAt(0);
