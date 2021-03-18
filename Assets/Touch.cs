@@ -11,11 +11,18 @@ public class Touch : MonoBehaviour
     private ColorManager _colorManager;
     private DetectTouch _touchManager;
 
+    public Animator animator;
+
+    [HideInInspector]
+    public bool didWin = false;
+
     private void Start()
     {
         _colorManager = FindObjectOfType<ColorManager>();
         _touchManager = FindObjectOfType<DetectTouch>();
         _touchManager.touches.Add(this);
+
+        animator = GetComponent<Animator>();
 
         //transform.Find("Center").GetComponent<SVGImage>().color = _colorManager.colors[0];
         color = _colorManager.colors[0];
@@ -25,13 +32,17 @@ public class Touch : MonoBehaviour
 
     public void Won()
     {
-        Camera.main.backgroundColor = color;
+        //Camera.main.backgroundColor = color;
         transform.Find("Background").gameObject.SetActive(true);
+        didWin = true;
+
+
+        animator.SetTrigger("win");
     }
 
     public void Lost()
     {
-        transform.Find("Center").GetComponent<Image>().enabled = false;
+        animator.SetTrigger("endTouch");
     }
 
     private void OnDestroy()

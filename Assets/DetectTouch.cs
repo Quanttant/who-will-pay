@@ -30,7 +30,7 @@ public class DetectTouch : MonoBehaviour
             if (selectedOne)
             {
                 selectedOne = false;
-                Camera.main.backgroundColor = _colorManager.backgroundColor;
+                //Camera.main.backgroundColor = _colorManager.backgroundColor;
             }
         }
 
@@ -51,16 +51,26 @@ public class DetectTouch : MonoBehaviour
         while (i < Input.touchCount)
         {
             UnityEngine.Touch t = Input.GetTouch(i);
+            if (touches.Find(x => x.fingerId == t.fingerId) == null && selectedOne) return;
             if (t.phase == TouchPhase.Began)
             {
-                createCircle(t);
-                counter = maxTime;
+                if (!selectedOne)
+                {
+                    createCircle(t);
+                    counter = maxTime;
+                }
             }
             else if (t.phase == TouchPhase.Ended)
             {
                 counter = maxTime;
                 Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
-                Destroy(thisTouch.gameObject);
+                //if (thisTouch.didWin)
+                    //thisTouch.animator.SetTrigger("endWin");
+                //else
+                thisTouch.animator.SetTrigger("endTouch");
+                
+                Destroy(thisTouch.gameObject, 1);
+
             }
             else if (t.phase == TouchPhase.Moved)
             {

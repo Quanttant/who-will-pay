@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "9TKGL20903000050",
     "m_SelectedPackage": {
-        "deviceId": "9TKGL20903000050",
-        "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 1888,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,13 +12,13 @@
             "deviceId": "9TKGL20903000050",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 13556,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "9TKGL20903000050",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 17435,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "9TKGL20903000050",
@@ -30,6 +30,18 @@
             "deviceId": "9TKGL20903000050",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 1888,
+            "exited": true
+        },
+        {
+            "deviceId": "9TKGL20903000050",
+            "name": "com.unity3d.mobileremote",
+            "processId": 15756,
+            "exited": true
+        },
+        {
+            "deviceId": "9TKGL20903000050",
+            "name": "com.twitter.android",
+            "processId": 21929,
             "exited": false
         }
     ],
