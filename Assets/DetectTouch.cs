@@ -51,31 +51,36 @@ public class DetectTouch : MonoBehaviour
         while (i < Input.touchCount)
         {
             UnityEngine.Touch t = Input.GetTouch(i);
-            if (touches.Find(x => x.fingerId == t.fingerId) == null && selectedOne) return;
+            Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
+
+            if (thisTouch == null && selectedOne) return;
             if (t.phase == TouchPhase.Began)
             {
                 if (!selectedOne)
                 {
-                    createCircle(t);
-                    counter = maxTime;
+                    if (thisTouch == null)
+                    {
+                        createCircle(t);
+                        counter = maxTime;
+                    }
                 }
             }
             else if (t.phase == TouchPhase.Ended)
             {
                 counter = maxTime;
-                Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
-                //if (thisTouch.didWin)
-                    //thisTouch.animator.SetTrigger("endWin");
-                //else
-                thisTouch.animator.SetTrigger("endTouch");
-                
-                Destroy(thisTouch.gameObject, 1);
+                if (thisTouch != null)
+                {
+                    thisTouch.animator.SetTrigger("endTouch");
+                    Destroy(thisTouch.gameObject, 0.3f);
+                }
 
             }
             else if (t.phase == TouchPhase.Moved)
             {
-                Touch thisTouch = touches.Find(x => x.fingerId == t.fingerId);
-                thisTouch.GetComponent<RectTransform>().anchoredPosition = ConvertToCanvasPos(t.position);
+                if (thisTouch != null)
+                {
+                    thisTouch.GetComponent<RectTransform>().anchoredPosition = ConvertToCanvasPos(t.position);
+                }
             }
             i++;
         }

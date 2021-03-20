@@ -1,10 +1,10 @@
 {
     "m_SelectedDeviceId": "9TKGL20903000050",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
-        "exited": false
+        "deviceId": "9TKGL20903000050",
+        "name": "com.Quanttant.whowillpay",
+        "processId": 22464,
+        "exited": true
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -43,6 +43,12 @@
             "name": "com.twitter.android",
             "processId": 21929,
             "exited": false
+        },
+        {
+            "deviceId": "9TKGL20903000050",
+            "name": "com.Quanttant.whowillpay",
+            "processId": 22464,
+            "exited": true
         }
     ],
     "m_Tags": {
